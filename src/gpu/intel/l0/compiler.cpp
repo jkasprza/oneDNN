@@ -35,9 +35,9 @@ namespace l0 {
 
 inline void *find_ocloc_symbol(const char *symbol) {
 #ifdef _WIN32
-    // Use LOAD_LIBRARY_SEARCH_SYSTEM32 flag to avoid DLL hijacking issue.
+    //TODO: Use LOAD_LIBRARY_SEARCH_SYSTEM32 flag to avoid DLL hijacking issue.
     HMODULE handle = LoadLibraryExA(
-            "ocloc64.dll", nullptr, LOAD_LIBRARY_SEARCH_SYSTEM32);
+            "ocloc64.dll", nullptr, LOAD_LIBRARY_SEARCH_DEFAULT_DIRS);
     if (!handle) return nullptr;
     return reinterpret_cast<void *>(GetProcAddress(handle, symbol));
 #else
