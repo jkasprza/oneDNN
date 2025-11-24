@@ -16,6 +16,16 @@
 
 #include "gemmstone/config.hpp"
 
-#   include "ngen_asm.hpp"
-#   include "ngen_opencl.hpp"
-#   include "ngen_register_allocator.hpp"
+#include "ngen_asm.hpp"
+
+#ifdef WITH_SYCL_RUNTIME
+#include "ngen_sycl.hpp"
+#endif
+#ifdef WITH_OPENCL_RUNTIME
+#include "ngen_opencl.hpp"
+#endif
+#ifdef WITH_L0_RUNTIME
+#include "ngen_level_zero.hpp"
+#endif
+
+#include "ngen_register_allocator.hpp"
