@@ -100,13 +100,14 @@ inline ze_driver_handle_t get_driver(const engine &aengine) {
 ///
 /// @param aengine Engine object to use for the stream.
 /// @param alist Level Zero immediate command list to use for the stream.
+/// @param profiling Flag to enable profiling.
 ///
 /// @returns An execution stream.
 inline stream make_stream(
-        const engine &aengine, ze_command_list_handle_t alist) {
+        const engine &aengine, ze_command_list_handle_t alist, bool profiling) {
     dnnl_stream_t astream;
     error::wrap_c_api(
-            dnnl_l0_interop_stream_create(&astream, aengine.get(), alist),
+            dnnl_l0_interop_stream_create(&astream, aengine.get(), alist, profiling),
             "could not create a stream");
     return stream(astream);
 }

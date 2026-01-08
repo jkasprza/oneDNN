@@ -22,14 +22,19 @@
 using namespace dnnl::impl;
 
 dnnl_status_t dnnl_l0_interop_stream_create(dnnl_stream_t *stream,
-        dnnl_engine_t engine, ze_command_list_handle_t list) {
+        dnnl_engine_t engine, ze_command_list_handle_t list, bool profiling) {
     bool args_ok = !utils::any_null(stream, engine, list)
             && engine->runtime_kind() == runtime_kind::l0;
     if (!args_ok) return status::invalid_arguments;
-
+    unsigned flags = stream_flags::default_flags;
+    if (profiling) {
+#ifdef DNNL_EXPERIMENTAL_PROFILING
+        flags |= stream_flags::profiling;
+#endif
+    }
     std::unique_ptr<stream_impl_t> stream_impl(
             new gpu::intel::l0::stream_impl_t(
-                    stream_flags::default_flags, list));
+                    flags, list));
     if (!stream_impl) return status::out_of_memory;
 
     CHECK(engine->create_stream(stream, stream_impl.get()));

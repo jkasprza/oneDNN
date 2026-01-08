@@ -82,10 +82,11 @@ dnnl_status_t DNNL_API dnnl_l0_interop_engine_get_driver(
 /// @param engine Engine to create the execution stream on.
 /// @param queue Level Zero command queue to use.
 /// @param list Level Zero command list to use.
+/// @param profiling Flag to enable profiling.
 /// @returns #dnnl_success on success and a status describing the error
 ///     otherwise.
 dnnl_status_t DNNL_API dnnl_l0_interop_stream_create(dnnl_stream_t *stream,
-        dnnl_engine_t engine, ze_command_list_handle_t list);
+        dnnl_engine_t engine, ze_command_list_handle_t list, bool profiling);
 
 /// Returns the Level Zero command list associated with an execution stream.
 ///
