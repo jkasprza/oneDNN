@@ -41,7 +41,7 @@ public:
                     kernel_timestamp_result.context, max_timestamp_value);
         }
 
-        uint64_t get_cycles() const { return global_ - context_; }
+        uint64_t get_cycles() const { return context_; }
 
         uint64_t get_nsec() const { return get_cycles() * freq_; }
 

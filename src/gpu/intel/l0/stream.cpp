@@ -39,7 +39,7 @@ stream_t::stream_t(impl::engine_t *engine, impl::stream_impl_t *stream_impl)
     : gpu::intel::stream_t(engine, stream_impl) {
     if (is_profiling_enabled()) {
         ze_device_properties_t device_properties = {};
-        device_properties.stype = ZE_STRUCTURE_TYPE_DEVICE_PROPERTIES;
+        device_properties.stype = ZE_STRUCTURE_TYPE_DEVICE_PROPERTIES_1_2;
         device_properties.pNext = nullptr;
 
         l0::zeDeviceGetProperties(utils::downcast<engine_t *>(engine)->device(),
